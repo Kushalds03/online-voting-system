@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: voting-backend
+  template:
+    metadata:
+      labels:
+        app: voting-backend
+    spec:
+      containers:
+        - name: voting-backend
+          image: kushalds03/voting-backend:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: voting-backend-secret
+                  key: MONGO_URI
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: voting-backend-secret
+                  key: JWT_SECRET

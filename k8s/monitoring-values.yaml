@@ -1,0 +1,5 @@
+prometheus-node-exporter:
+  enabled: false
+
+nodeExporter:
+  enabled: false
