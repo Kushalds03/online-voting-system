@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: voting-frontend
+  template:
+    metadata:
+      labels:
+        app: voting-frontend
+    spec:
+      containers:
+      - name: voting-frontend
+        image: kushalds03/voting-frontend:latest
+        ports:
+        - containerPort: 80
